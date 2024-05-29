@@ -80,6 +80,8 @@ RegisterNetEvent('sf_camerasecurity:Server:SaveNewCam',function(name, setting, c
                     end               
                 elseif Config.Inventory == 'ox_inventory' then
                     exports.ox_inventory:AddItem(src, Config.CameraSignalPaper, 1, info)
+                elseif Config.Inventory == 'qs-inventory' then
+                    exports["qs-inventory"]:AddItem(src, Config.CameraSignalPaper, 1, nil, info)
                 end                        
             end)   
         end     
@@ -110,7 +112,9 @@ RegisterNetEvent('sf_camerasecurity:Server:RemoveStaticCam',function(id)
                                             end                                      
                                         elseif Config.Inventory == 'ox_inventory' then
                                             exports.ox_inventory:AddItem(src, s.ItemName, 1)
-                                        end                                  
+                                        elseif Config.Inventory == 'qs-inventory' then
+                                            exports["qs-inventory"]:AddItem(src, s.ItemName, 1)
+                                        end                                
                                     end) 
                                     loopbreak = true
                                     break
@@ -130,7 +134,9 @@ RegisterNetEvent('sf_camerasecurity:Server:RemoveStaticCam',function(id)
                                         end                                      
                                     elseif Config.Inventory == 'ox_inventory' then
                                         exports.ox_inventory:AddItem(src, s.ItemName, 1)
-                                    end               
+                                    elseif Config.Inventory == 'qs-inventory' then
+                                        exports["qs-inventory"]:AddItem(src, s.ItemName, 1)
+                                    end                
                                 end)    
                             end
                         end            
@@ -145,6 +151,8 @@ RegisterNetEvent('sf_camerasecurity:Server:RemoveStaticCam',function(id)
                         end                      
                     elseif Config.Inventory == 'ox_inventory' then
                         exports.ox_inventory:AddItem(src, Config.SignalItem.ItemName, 1)
+                    elseif Config.Inventory == 'qs-inventory' then
+                        exports["qs-inventory"]:AddItem(src, Config.SignalItem.ItemName, 1)
                     end                
                 end)        
             end
@@ -157,7 +165,7 @@ RegisterNetEvent('sf_camerasecurity:Server:RemoveStaticCam',function(id)
             break
         end 
     end  
-    TriggerClientEvent('sf_camerasecurity:client:notify', src, 'Camera Removed Successfully', 'success', 5000)
+    TriggerClientEvent('sf_camerasecurity:client:notify', src, 'Kamera wurde erfolgreich entfernt', 'success', 5000)
 end)
 
 RegisterNetEvent('sf_camerasecurity:Server:BuyItem',function(typePay, price, item, amountItem)
@@ -176,7 +184,9 @@ RegisterNetEvent('sf_camerasecurity:Server:BuyItem',function(typePay, price, ite
             end        
         elseif Config.Inventory == 'ox_inventory' then
             exports.ox_inventory:AddItem(src, item, amountItem)
-        end        
+        elseif Config.Inventory == 'qs-inventory' then
+            exports["qs-inventory"]:AddItem(src, item, amountItem)
+        end         
         TriggerClientEvent('sf_camerasecurity:client:notify', src, '('..Core.Shared.Items[item].label..') bought successfully', 'success')
     else
         TriggerClientEvent('sf_camerasecurity:client:notify', src, 'No enough money', 'error')
@@ -200,6 +210,8 @@ lib.callback.register('sf_camerasecurity:Server:HasItem', function(source, item)
         end       
     elseif Config.Inventory == 'ox_inventory' then        
         return exports.ox_inventory:GetSlotWithItem(source, item)
+    elseif Config.Inventory == 'qs-inventory' then        
+        -- return exports.ox_inventory:GetSlotWithItem(source, item)
     end
 end)
 

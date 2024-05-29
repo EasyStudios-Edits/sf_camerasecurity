@@ -47,6 +47,9 @@ function getItemInfo(item)
         return Core.Shared.Items[item]
     elseif Config.Inventory == 'ox_inventory' then
         return oxItems[item]
+    elseif Config.Inventory == 'qs-inventory' then
+        local ItemList = exports["qs-inventory"]:GetItemList()
+        return ItemList[item]
     end
 end
 
